@@ -133,12 +133,12 @@ function App() {
          {
   title: "Frontend",
   icon: <FaCode />,
-  skills: ["React", "Tailwind", "Responsive UI", "Accessibility"],
+  skills: ["HTML","JavaScript","CSS","React", "Tailwind", "Responsive UI", "Accessibility"],
 },
 {
   title: "Backend",
   icon: <FaServer />,
-  skills: ["Node.js", "Express", "MongoDB", "REST APIs"],
+  skills: ["Node.js", "Express", "MongoDB", "REST APIs","MySql"],
 },
 
           {
@@ -162,7 +162,7 @@ function App() {
     <span className="text-red-500 text-2xl">
       {group.icon}
     </span>
-    <h3 className="text-3xl font-semibold uppercase text-green-500 text-white">
+    <h3 className="text-3xl font-semibold uppercase text-green-500 ">
       {group.title}
     </h3>
   </div>
@@ -199,7 +199,7 @@ function App() {
         <div
           key={project.title}
           className="group relative h-[380px] rounded-2xl
-                     bg-zinc-800 overflow-hidden hover:shadow-[0_0_25px_rgba(125,5,248,1)] transition
+                     bg-zinc-800 overflow-hidden hover:shadow-[0_0_25px_rgba(125,5,248,1)] 
                      transition-transform duration-300
                      hover:-translate-y-2"
         >
@@ -258,7 +258,7 @@ function App() {
                 rel="noopener noreferrer"
                 className="text-red-500 hover:text-red-400 transition"
               >
-                Live Demo →
+              
               </a>
             </div>
           </div>
@@ -272,42 +272,57 @@ function App() {
 
       {/* CONTACT */}
       <Section id="contact" title="Contact Details">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6">
 
-    {/* LEFT CONTENT */}
-    <div className="text-left">
-      <h2 className="text-4xl font-semibold mb-2 text-white">
-        Let’s build something <span className="text-green-600">meaningful.</span>
-      </h2>
+    {/* TOP CONTENT */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-14">
+      <div className="text-left">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-3 text-white">
+          Let’s build something{" "}
+          <span className="text-green-500">meaningful.</span>
+        </h2>
 
-      <p className="text-white font-bold leading-relaxed text-xl mb-6">
-        I’m always open to discussing new opportunities,
-        collaborations, or interesting ideas.
-        Whether you have a project in mind, a question,
-        or just want to connect — feel free to reach out.
-      </p>
-
-      
+        <p className="text-zinc-200 font-medium leading-relaxed text-base sm:text-lg md:text-xl max-w-xl">
+          I’m always open to discussing new opportunities, collaborations,
+          or interesting ideas. Whether you have a project in mind, a question,
+          or just want to connect — feel free to reach out.
+        </p>
+      </div>
     </div>
+
+    {/* CONTACT CARDS */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center">
+      {aboutCards.map((item, index) => (
+        <a
+          key={index}
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            w-full max-w-[260px]
+            h-48 sm:h-56
+            bg-zinc-800 rounded-xl
+            flex flex-col items-center justify-center gap-3
+            text-white uppercase font-bold
+            transition-all duration-300
+            hover:shadow-[0_0_25px_rgba(239,68,68,0.9)]
+            hover:-translate-y-1
+            active:scale-95
+          "
+        >
+          <div className="text-4xl sm:text-5xl md:text-6xl text-red-500">
+            {item.icon}
+          </div>
+          <p className="text-lg sm:text-xl md:text-2xl font-semibold">
+            {item.title}
+          </p>
+        </a>
+      ))}
     </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">{
-          aboutCards.map((item,index) => (
-            <a key={index} href={item.url} target="_blank" rel="noopener noreferrer"
-             className="h-60 w-60 bg-zinc-800 rounded-xl flex flex-col items-center justify-center gap-4
-                        hover:shadow-[0_0_25px_rgba(239,68,68,1)]
- transition transform hover:-translate-y-1 text-white uppercase font-bold">
-               <div className="text-7xl text-red-600">{item.icon}</div>
-              <p className="text-3xl font-semibold">{item.title}</p>
 
-            </a>
-            
+  </div>
+</Section>
 
-          ))
-        }
-
-        </div>
-      </Section>
-      
       
     </>
   );
