@@ -81,109 +81,116 @@ function App() {
 
   return (
     <>
+      <Navbar />
       <Hero />
       <Divider />
-      <Navbar />
+    
 
       {/* HOME SECTION */}
+     
+      
       
 <Divider />
 
       {/* ABOUT */}
      <Section id="about" title="">
-  <div className="relative max-w-7xl mx-auto px-6">
+  <div className="max-w-7xl  mx-auto px-6">
 
-    {/* SECTION LABEL */}
+    {/* HEADER */}
     <div className="flex items-center gap-4 mb-16">
-      <span className="h-px w-20  bg-red-600"></span>
-      <p className="tracking-widest text-2xl font-bold text-white uppercase">
+      <span className="h-px w-16 bg-cyan-400"></span>
+      <p className="tracking-widest text-xl font-semibold text-cyan-400 uppercase">
         About Me
       </p>
     </div>
 
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+    <div className="grid lg:grid-cols-2 gap-16">
 
-      {/* LEFT — TEXT */}
-      <div>
-        <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-8">
-          I build <span className="text-green-700">System.</span>,<br />
-          not just <span className="text-red-600">interfaces.</span>
-        </h2>
+      {/* LEFT — STORY */}
+      <div className="relative">
 
-        <p className="text-white font-bold leading-relaxed mb-6 max-w-xl">
-          I’m a Computer Science student and software developer focused on
-          building clean, scalable, and production-ready web applications.
-        </p>
+        {/* vertical line */}
+        <div className="absolute left-0 top-2 w-[2px] h-full bg-gradient-to-b from-cyan-400 to-transparent"></div>
 
-        <p className="text-white font-bold  leading-relaxed mb-6 max-w-xl">
-          I work across the stack — from crafting responsive user experiences
-          to designing APIs and solving backend logic problems.
-        </p>
+        <div className="pl-6">
+          <h2 className="text-4xl text-white md:text-5xl font-bold leading-tight mb-6">
+            I build <span className="text-cyan-400">systems</span>, <br />
+            not just <span className="text-orange-500">interfaces</span>.
+          </h2>
 
-        <p className="text-green-200 font-bold  leading-relaxed max-w-xl">
-          Currently sharpening my problem-solving skills, system design
-          fundamentals, and code quality.
-        </p>
+          <p className="text-zinc-400 mb-6 leading-relaxed">
+            Computer Science student focused on building scalable,
+            production-ready web applications with clean architecture.
+          </p>
+
+          <p className="text-zinc-400 mb-6 leading-relaxed">
+            I work across the stack — from crafting responsive UIs
+            to designing APIs and solving backend logic problems.
+          </p>
+
+          <p className="text-cyan-300 font-medium">
+            Currently improving <span className="text-white"> System Design, DSA, and code quality.</span>
+          </p>
+        </div>
       </div>
 
-      {/* RIGHT — SKILL STACK */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {/* RIGHT — SKILLS */}
+      <div className="grid sm:grid-cols-2 gap-6">
 
         {[
-         {
-  title: "Frontend",
-  icon: <FaCode />,
-  skills: ["HTML","JavaScript","CSS","React", "Tailwind", "Responsive UI", "Accessibility"],
-},
-{
-  title: "Backend",
-  icon: <FaServer />,
-  skills: ["Node.js", "Express", "MongoDB", "REST APIs","MySql"],
-},
-
+          {
+            title: "Frontend",
+            skills: ["HTML", "CSS", "JavaScript", "React", "Tailwind"],
+          },
+          {
+            title: "Backend",
+            skills: ["Node.js", "Express", "MongoDB", "MySQL"],
+          },
           {
             title: "Problem Solving",
-            skills: ["DSA", "Algorithms", "DBMS", "LeetCode"],
+            skills: ["DSA", "Algorithms", "LeetCode", "DBMS"],
           },
           {
             title: "Tools",
             skills: ["Git", "GitHub", "Postman", "VS Code"],
           },
         ].map((group) => (
-        <div
-  key={group.title}
-  className="relative border border-white/10 rounded-xl p-6
-             bg-[#020617]  hover:shadow-[0_0_25px_rgba(34,197,94,0.6)]
+          <div
+            key={group.title}
+            className="
+              group p-6 rounded-xl 
+              bg-white/5 backdrop-blur-lg 
+              border border-white/10
+              hover:scale-105 hover:-translate-y-1
+              transition duration-300
+            "
+          >
+            {/* TITLE */}
+            <h3 className="text-xl font-semibold text-cyan-400 mb-4 group-hover:text-white transition">
+              {group.title}
+            </h3>
 
-  transition"
->
-  {/* TITLE + ICON */}
-  <div className="flex items-center gap-3 mb-4 ">
-    <span className="text-red-500 text-2xl">
-      {group.icon}
-    </span>
-    <h3 className="text-3xl font-semibold uppercase text-green-500 ">
-      {group.title}
-    </h3>
-  </div>
-
-  {/* SKILLS */}
-  <div className="flex flex-wrap gap-2">
-    {group.skills.map((skill) => (
-      <span
-        key={skill}
-        className="text- px-3 py-1 rounded-full
-                   border border-white/10
-                   text-white font-bold hover:text-red-400 transition"
-      >
-        {skill}
-      </span>
-    ))}
-  </div>
-</div>
-
+            {/* SKILLS */}
+            <div className="flex flex-wrap gap-2">
+              {group.skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="
+                    text-sm px-3 py-1 rounded-full
+                    border border-white/10
+                    text-zinc-300
+                    group-hover:text-white
+                  "
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
         ))}
+
       </div>
+
     </div>
   </div>
 </Section>
@@ -271,58 +278,90 @@ function App() {
 <Divider />
 
       {/* CONTACT */}
-      <Section id="contact" title="Contact Details">
-  <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <Section id="contact" title="">
+  <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
 
-    {/* TOP CONTENT */}
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-14">
-      <div className="text-left">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-3 text-white">
-          Let’s build something{" "}
-          <span className="text-green-500">meaningful.</span>
-        </h2>
+    {/* LEFT — CTA */}
+    <div>
+      <h2 className="text-5xl text-white  font-bold leading-tight mb-6">
+        Let’s create something{" "}
+        <span className="text-cyan-400">impactful</span>.
+      </h2>
 
-        <p className="text-zinc-200 font-medium leading-relaxed text-base sm:text-lg md:text-xl max-w-xl">
-          I’m always open to discussing new opportunities, collaborations,
-          or interesting ideas. Whether you have a project in mind, a question,
-          or just want to connect — feel free to reach out.
-        </p>
-      </div>
+      <p className="text-zinc-400 text-lg max-w-xl mb-8">
+        Got an idea, project, or opportunity? I’m always open to meaningful
+        conversations and building real-world solutions.
+      </p>
+
+      {/* BIG CTA BUTTON */}
+      <a
+        href="mailto:ritikkumarsinghdeo6@gmail.com"
+        className="inline-block px-8 py-4 bg-cyan-500 rounded-xl text-lg font-semibold 
+                   hover:bg-cyan-400 transition shadow-[0_0_20px_rgba(0,255,255,0.4)]"
+      >
+        Let’s Talk →
+      </a>
     </div>
 
-    {/* CONTACT CARDS */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center">
-      {aboutCards.map((item, index) => (
+    {/* RIGHT — CONTACT PANEL */}
+    <div className="flex  text-white flex-col gap-6">
+
+      {[
+        {
+          title: "GitHub",
+          icon: <FaGithub />,
+          url: "https://github.com/ritiksingh-121",
+        },
+        {
+          title: "LinkedIn",
+          icon: <FaLinkedin />,
+          url: "https://linkedin.com",
+        },
+        {
+          title: "Email",
+          icon: <MdEmail />,
+          url: "mailto:ritikkumarsinghdeo6@gmail.com",
+        },
+        {
+          title: "WhatsApp",
+          icon: <FaWhatsapp />,
+          url: "https://wa.me/918677275869",
+        },
+      ].map((item, i) => (
         <a
-          key={index}
+          key={i}
           href={item.url}
           target="_blank"
           rel="noopener noreferrer"
           className="
-            w-full max-w-[260px]
-            h-48 sm:h-56
-            bg-zinc-800 rounded-xl
-            flex flex-col items-center justify-center gap-3
-            text-white uppercase font-bold
-            transition-all duration-300
-            hover:shadow-[0_0_25px_rgba(239,68,68,0.9)]
-            hover:-translate-y-1
-            active:scale-95
+            group flex items-center justify-between
+            p-5 rounded-xl
+            bg-white/5 backdrop-blur-lg border border-white/10
+            hover:scale-[1.02] hover:bg-white/10
+            transition duration-300
           "
         >
-          <div className="text-4xl sm:text-5xl md:text-6xl text-red-500">
-            {item.icon}
+          {/* LEFT SIDE */}
+          <div className="flex items-center gap-4">
+            <div className="text-3xl text-cyan-400 group-hover:scale-110 transition">
+              {item.icon}
+            </div>
+            <span className="text-lg font-medium">
+              {item.title}
+            </span>
           </div>
-          <p className="text-lg sm:text-xl md:text-2xl font-semibold">
-            {item.title}
-          </p>
+
+          {/* RIGHT ARROW */}
+          <span className="text-zinc-400 group-hover:text-white transition">
+            →
+          </span>
         </a>
       ))}
+
     </div>
 
   </div>
 </Section>
-
       
     </>
   );
