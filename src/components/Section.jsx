@@ -4,11 +4,11 @@ function Section({ id, title, children }) {
   return (
     <section
       id={id}
-      className="w-full min-h-screen bg-[#0a0a0f] py-24"
+      className="w-full min-h-screen bg-[#f8f9fa] dark:bg-[#0a0a0f] py-24"
     >
       <div className="max-w-7xl mx-auto px-6">
         {title && (
-          <h1 className="text-4xl uppercase text-center mb-16 font-bold text-cyan-400">
+          <h1 className="text-4xl uppercase text-center mb-16 font-bold text-cyan-600 dark:text-cyan-400">
             {title}
           </h1>
         )}
@@ -17,7 +17,5 @@ function Section({ id, title, children }) {
     </section>
   );
 }
-
-
 
 export default Section;
