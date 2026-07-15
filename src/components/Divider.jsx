@@ -1,5 +1,3 @@
-import React from "react";
-
 function Divider() {
   return (
     <div className="relative w-full flex justify-center">

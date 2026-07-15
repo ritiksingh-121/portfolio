@@ -1,4 +1,5 @@
-import React, { createContext, useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { ThemeContext } from "./theme";
 
 const THEME_KEY = "portfolio-theme";
 
@@ -14,12 +15,6 @@ function getInitialTheme() {
     ? "dark"
     : "light";
 }
-
-export const ThemeContext = createContext({
-  theme: "dark",
-  toggleTheme: () => {},
-  setTheme: () => {},
-});
 
 export function ThemeProvider({ children }) {
   const [theme, setThemeState] = useState(getInitialTheme);

@@ -1,10 +1,30 @@
-import React from "react";
+import { useEffect, useRef } from "react";
 
-function Section({ id, title, children }) {
+function Section({ id, title, children, className = "" }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("visible");
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       id={id}
-      className="w-full min-h-screen bg-[#f8f9fa] dark:bg-[#0a0a0f] py-24"
+      ref={ref}
+      className={`w-full min-h-screen bg-[#f8f9fa] dark:bg-[#0a0a0f] py-24 fade-in scroll-mt-16 ${className}`}
     >
       <div className="max-w-7xl mx-auto px-6">
         {title && (
