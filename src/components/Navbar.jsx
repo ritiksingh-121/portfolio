@@ -81,11 +81,10 @@ function Navbar() {
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`max-w-6xl mx-auto rounded-full transition-all duration-300 ${
-          scrolled 
-            ? "glass shadow-lg py-2 px-6" 
+        className={`max-w-6xl mx-auto rounded-full transition-all duration-300 ${scrolled
+            ? "glass shadow-lg py-2 px-6"
             : "bg-transparent py-4 px-6 border-b border-transparent"
-        }`}
+          }`}
       >
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -152,7 +151,9 @@ function Navbar() {
 
             {/* Resume button */}
             <a
-              href="#"
+              href="https://drive.google.com/file/d/1VCpfnlX7t-F51MqiS7zZkJmEIIOj2BW8/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-4 py-2 text-xs font-semibold rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 hover:bg-violet-600 dark:hover:bg-violet-500 hover:text-white dark:hover:text-white hover:scale-105 active:scale-95 transition-all duration-300"
             >
               Resume
@@ -193,11 +194,10 @@ function Navbar() {
                 <button
                   key={id}
                   onClick={() => handleClick(id)}
-                  className={`text-left py-3 px-4 rounded-xl font-semibold text-lg transition duration-200 ${
-                    active === id
+                  className={`text-left py-3 px-4 rounded-xl font-semibold text-lg transition duration-200 ${active === id
                       ? "bg-violet-600/10 text-violet-600 dark:bg-white/10 dark:text-white"
                       : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-                  }`}
+                    }`}
                 >
                   {label}
                 </button>
@@ -223,7 +223,9 @@ function Navbar() {
                   </a>
                 </div>
                 <a
-                  href="#"
+                  href="https://drive.google.com/file/d/1VCpfnlX7t-F51MqiS7zZkJmEIIOj2BW8/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="px-6 py-3 font-semibold text-sm rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-center"
                 >
                   Resume
