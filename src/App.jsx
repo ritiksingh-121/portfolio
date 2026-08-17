@@ -9,7 +9,7 @@ import Projects from "./components/Projects";
 import ProjectEstimator from "./components/ProjectEstimator";
 import TechStack from "./components/TechStack";
 import Guarantees from "./components/Guarantees";
-import Testimonials from "./components/Testimonials";
+import FAQ from "./components/FAQ";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
@@ -65,7 +65,7 @@ function HomePage({ onOpenBooking }) {
       <ProjectEstimator onOpenBooking={onOpenBooking} />
       <TechStack />
       <Guarantees />
-      <Testimonials />
+      <FAQ />
       <ContactForm />
     </main>
   );
