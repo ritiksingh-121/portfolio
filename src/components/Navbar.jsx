@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useTheme } from "../hooks/useTheme";
-import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon, Menu, X, Mail } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import { Sun, Moon, Menu, X, ArrowUpRight, Calendar, ArrowRight } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 const NAV_LINKS = [
   { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "experience", label: "Experience" },
-  { id: "contact", label: "Contact" }
+  { id: "services", label: "Services" },
+  { id: "process", label: "Process" },
+  { id: "projects", label: "Work" },
+  { id: "estimator", label: "Scope Estimator" },
+  { id: "tech-stack", label: "Stack" },
+  { id: "contact", label: "Contact" },
 ];
 
-function Navbar() {
+export default function Navbar({ onOpenBooking }) {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === "/";
-  const [active, setActive] = useState("home");
-  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [activeSection, setActiveSection] = useState("home");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function Navbar() {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              setActive(entry.target.id);
+              setActiveSection(entry.target.id);
             }
           });
         },
@@ -54,189 +54,141 @@ function Navbar() {
     };
   }, [isHome]);
 
-  const handleClick = (id) => {
-    setMenuOpen(false);
+  const handleNavClick = (id) => {
+    setMobileMenuOpen(false);
     if (!isHome) {
-      navigate("/#" + id);
+      navigate(`/#${id}`);
       return;
     }
-    const element = document.getElementById(id);
-    if (element) {
+    const el = document.getElementById(id);
+    if (el) {
       const offset = 80;
       const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
+      const elementRect = el.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
       const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
     }
   };
 
   return (
-    <header className="fixed top-4 left-0 w-full z-50 px-4 transition-all duration-300">
-      <motion.div
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`max-w-6xl mx-auto rounded-full transition-all duration-300 ${scrolled
-            ? "glass shadow-lg py-2 px-6"
-            : "bg-transparent py-4 px-6 border-b border-transparent"
-          }`}
-      >
-        <div className="flex items-center justify-between">
-          {/* Logo */}
+    <nav
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 dark:bg-[#09090B]/80 backdrop-blur-xl border-b border-zinc-200/80 dark:border-zinc-800/80 shadow-sm shadow-zinc-950/5"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        {/* Brand Logo */}
+        <Link
+          to="/"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="flex items-center gap-2.5 group cursor-pointer"
+        >
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-violet-600 via-purple-600 to-cyan-400 text-white font-extrabold text-lg shadow-md shadow-violet-600/20 group-hover:scale-105 transition-transform duration-300">
+            A
+          </div>
+          <div className="flex flex-col">
+            <span className="text-base font-bold tracking-tight text-zinc-950 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+              ApexCraft<span className="text-violet-500 font-normal">.Studio</span>
+            </span>
+            <span className="text-[10px] uppercase font-mono tracking-widest text-zinc-400">
+              Software Agency
+            </span>
+          </div>
+        </Link>
+
+        {/* Desktop Nav Links */}
+        <div className="hidden lg:flex items-center gap-1 p-1.5 rounded-full border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/50 backdrop-blur-md">
+          {NAV_LINKS.map(({ id, label }) => {
+            const isActive = isHome && activeSection === id;
+            return (
+              <button
+                key={id}
+                onClick={() => handleNavClick(id)}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
+                  isActive
+                    ? "bg-white dark:bg-zinc-800 text-zinc-950 dark:text-white shadow-sm"
+                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white"
+                }`}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Right CTA and Theme Toggle */}
+        <div className="hidden sm:flex items-center gap-3">
+          {onOpenBooking && (
+            <button
+              onClick={onOpenBooking}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-violet-600 hover:bg-violet-500 text-white shadow-md shadow-violet-600/25 transition duration-200 hover:scale-105"
+            >
+              <Calendar size={13} />
+              <span>Book Discovery Call</span>
+              <ArrowRight size={13} />
+            </button>
+          )}
+
           <button
-            onClick={() => handleClick("home")}
-            className="text-2xl font-black tracking-tighter bg-gradient-to-r from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent hover:scale-105 transition duration-300"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition duration-200"
           >
-            RS.
+            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+        </div>
+
+        {/* Mobile menu button */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400"
+          >
+            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map(({ id, label }) => {
-              const isActive = active === id;
-              return (
-                <button
-                  key={id}
-                  onClick={() => handleClick(id)}
-                  className="relative px-4 py-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition duration-300"
-                >
-                  <span className="relative z-10">{label}</span>
-                  {isActive && (
-                    <motion.span
-                      layoutId="activeTab"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      className="absolute inset-0 bg-violet-600/10 dark:bg-white/10 rounded-full border border-violet-600/20 dark:border-white/10"
-                    />
-                  )}
-                </button>
-              );
-            })}
-          </nav>
-
-          {/* Action Tools (Theme, Socials, Resume) */}
-          <div className="hidden md:flex items-center gap-4">
-            {/* Socials */}
-            <div className="flex items-center gap-2 border-r border-zinc-200 dark:border-zinc-800 pr-4">
-              <a
-                href="https://github.com/ritiksingh-121"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white transition"
-              >
-                <FaGithub size={18} />
-              </a>
-              <a
-                href="https://www.linkedin.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white transition"
-              >
-                <FaLinkedin size={18} />
-              </a>
-            </div>
-
-            {/* Dark Mode toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition duration-300"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-
-            {/* Resume button */}
-            <a
-              href="https://drive.google.com/file/d/1VCpfnlX7t-F51MqiS7zZkJmEIIOj2BW8/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 text-xs font-semibold rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 hover:bg-violet-600 dark:hover:bg-violet-500 hover:text-white dark:hover:text-white hover:scale-105 active:scale-95 transition-all duration-300"
-            >
-              Resume
-            </a>
-          </div>
-
-          {/* Mobile menu trigger */}
-          <div className="flex md:hidden items-center gap-3">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="p-2 rounded-full text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-              aria-label="Toggle menu"
-            >
-              {menuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400"
+          >
+            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
-      </motion.div>
+      </div>
 
       {/* Mobile Drawer */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass rounded-3xl mt-2 overflow-hidden shadow-2xl border border-zinc-200/50 dark:border-zinc-800/50"
-          >
-            <div className="flex flex-col gap-2 p-6">
-              {NAV_LINKS.map(({ id, label }) => (
-                <button
-                  key={id}
-                  onClick={() => handleClick(id)}
-                  className={`text-left py-3 px-4 rounded-xl font-semibold text-lg transition duration-200 ${active === id
-                      ? "bg-violet-600/10 text-violet-600 dark:bg-white/10 dark:text-white"
-                      : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-                    }`}
-                >
-                  {label}
-                </button>
-              ))}
-              <div className="h-px bg-zinc-200 dark:bg-zinc-800 my-2" />
-              <div className="flex items-center justify-between mt-2">
-                <div className="flex gap-4">
-                  <a
-                    href="https://github.com/ritiksingh-121"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full text-zinc-600 dark:text-zinc-400"
-                  >
-                    <FaGithub size={22} />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full text-zinc-600 dark:text-zinc-400"
-                  >
-                    <FaLinkedin size={22} />
-                  </a>
-                </div>
-                <a
-                  href="https://drive.google.com/file/d/1VCpfnlX7t-F51MqiS7zZkJmEIIOj2BW8/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 font-semibold text-sm rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-center"
-                >
-                  Resume
-                </a>
-              </div>
+      {mobileMenuOpen && (
+        <div className="lg:hidden border-b border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-[#09090B]/95 backdrop-blur-xl px-6 py-6 space-y-3">
+          {NAV_LINKS.map(({ id, label }) => (
+            <button
+              key={id}
+              onClick={() => handleNavClick(id)}
+              className="block w-full text-left text-sm font-semibold text-zinc-700 dark:text-zinc-300 hover:text-violet-600 py-1"
+            >
+              {label}
+            </button>
+          ))}
+          {onOpenBooking && (
+            <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenBooking();
+                }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-violet-600 text-white shadow-md shadow-violet-600/30"
+              >
+                <Calendar size={14} />
+                <span>Book 20-Min Discovery Call</span>
+              </button>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+          )}
+        </div>
+      )}
+    </nav>
   );
 }
-
-export default Navbar;

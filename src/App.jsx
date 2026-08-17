@@ -1,22 +1,22 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Lenis from "lenis";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
+import Services from "./components/Services";
+import Process from "./components/Process";
 import Projects from "./components/Projects";
+import ProjectEstimator from "./components/ProjectEstimator";
 import TechStack from "./components/TechStack";
-import GithubSection from "./components/GithubSection";
-import Experience from "./components/Experience";
-import Certifications from "./components/Certifications";
+import Guarantees from "./components/Guarantees";
 import Testimonials from "./components/Testimonials";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
 import ProjectDetail from "./components/ProjectDetail";
+import BookingModal from "./components/BookingModal";
 
-function HomePage() {
+function HomePage({ onOpenBooking }) {
   const location = useLocation();
 
   useEffect(() => {
@@ -58,14 +58,13 @@ function HomePage() {
 
   return (
     <main className="relative z-10">
-      <Hero />
-      <About />
-      <Skills />
+      <Hero onOpenBooking={onOpenBooking} />
+      <Services onOpenBooking={onOpenBooking} />
+      <Process />
       <Projects />
+      <ProjectEstimator onOpenBooking={onOpenBooking} />
       <TechStack />
-      <GithubSection />
-      <Experience />
-      <Certifications />
+      <Guarantees />
       <Testimonials />
       <ContactForm />
     </main>
@@ -73,15 +72,18 @@ function HomePage() {
 }
 
 function App() {
+  const [bookingOpen, setBookingOpen] = useState(false);
+
   return (
     <>
-      <Navbar />
+      <Navbar onOpenBooking={() => setBookingOpen(true)} />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage onOpenBooking={() => setBookingOpen(true)} />} />
         <Route path="/project/:slug" element={<ProjectDetail />} />
       </Routes>
       <Footer />
       <BackToTop />
+      <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
     </>
   );
 }
