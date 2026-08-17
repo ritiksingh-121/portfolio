@@ -1,11 +1,33 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Radio, Link2, Bot, Layers, Sparkles, Activity } from "lucide-react";
+import { ArrowUpRight, Radio, Link2, Bot, Layers, Sparkles, Activity, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import TechLogo from "./TechLogo";
 
 const PROJECTS = [
+  {
+    title: "VoxSpeak AI English Coach",
+    slug: "voxspeak",
+    desc: "Real-time AI English speaking coach with speech prosody analysis, adaptive learning journeys, and low-latency audio waveform feedback.",
+    tech: ["Next.js 14", "Web Audio API", "Groq AI", "Tailwind CSS", "Zustand", "PWA"],
+    github: "https://github.com/ritiksingh-121",
+    live: "https://web-five-pi-58.vercel.app/onboarding/welcome",
+    category: "AI Systems",
+    tags: ["AI Systems", "Speech Synthesis", "Web Audio"],
+    badge: "Sub-280ms Audio"
+  },
+  {
+    title: "IntervU AI Platform",
+    slug: "ai-interview-platform",
+    desc: "Voice-enabled mock interview platform with real-time speech prosody analysis, dynamic question generation, and actionable scoring matrix.",
+    tech: ["React", "TypeScript", "Node.js", "WebSockets", "OpenAI/Groq", "MongoDB"],
+    github: "https://github.com/ritiksingh-121/ai-interview-platform",
+    live: "https://ai-interview-platform-dusky.vercel.app/",
+    category: "AI Systems",
+    tags: ["AI Systems", "Speech", "WebSockets"],
+    badge: "Sub-450ms Voice"
+  },
   {
     title: "CrawlForge AI Engine",
     slug: "crawlforge",
@@ -16,17 +38,6 @@ const PROJECTS = [
     category: "AI & Automation",
     tags: ["AI Systems", "Full Stack", "Data Extraction"],
     badge: "Enterprise Pipeline"
-  },
-  {
-    title: "IntervU AI Platform",
-    slug: "ai-interview-platform",
-    desc: "Voice-enabled mock interview platform with real-time speech prosody analysis, dynamic question generation, and actionable scoring matrix.",
-    tech: ["React", "TypeScript", "Node.js", "WebSockets", "OpenAI/Groq", "MongoDB"],
-    github: "https://github.com/ritiksingh-121/ai-interview-platform",
-    live: "https://github.com/ritiksingh-121/ai-interview-platform#readme",
-    category: "AI Systems",
-    tags: ["AI Systems", "Speech", "WebSockets"],
-    badge: "Sub-450ms Voice"
   },
   {
     title: "AuraMotion Video Studio",
@@ -49,21 +60,10 @@ const PROJECTS = [
     category: "Real-time Systems",
     tags: ["WebSockets", "Full Stack", "Telemetry"],
     badge: "Sub-35ms Ping"
-  },
-  {
-    title: "LinkPulse Analytics Gateway",
-    slug: "url-shortener",
-    desc: "High-throughput URL redirection gateway with sub-20ms Base62 lookups, real-time geographic click tracking, and bot mitigation.",
-    tech: ["React", "Node.js", "MongoDB", "Express", "Tailwind CSS"],
-    github: "https://github.com/ritiksingh-121/URL-Shortener",
-    live: "https://github.com/ritiksingh-121/URL-Shortener#readme",
-    category: "Full Stack",
-    tags: ["Full Stack", "MERN", "Analytics"],
-    badge: "Sub-20ms Redirection"
   }
 ];
 
-const CATEGORIES = ["All", "AI & Automation", "AI Systems", "Real-time Systems", "Full Stack"];
+const CATEGORIES = ["All", "AI Systems", "AI & Automation", "Real-time Systems"];
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -147,7 +147,7 @@ export default function Projects() {
                       <div className="h-1 flex-1 rounded-full bg-zinc-800 overflow-hidden">
                         <div className="h-full bg-gradient-to-r from-violet-500 to-cyan-400 w-3/4 animate-pulse" />
                       </div>
-                      <span className="text-[9px] font-mono text-cyan-400">Production Ready</span>
+                      <span className="text-[9px] font-mono text-cyan-400">Live Architecture</span>
                     </div>
                   </div>
                 </div>
@@ -178,21 +178,32 @@ export default function Projects() {
 
                   {/* Actions */}
                   <div className="flex items-center justify-between gap-4 mt-8 pt-5 border-t border-zinc-100 dark:border-zinc-800/60">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors duration-200"
-                    >
-                      <FaGithub size={15} />
-                      Source Code
-                    </a>
+                    <div className="flex items-center gap-3">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors duration-200"
+                      >
+                        <FaGithub size={15} />
+                        Code
+                      </a>
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline"
+                      >
+                        <ExternalLink size={13} />
+                        Live Demo
+                      </a>
+                    </div>
 
                     <Link
                       to={`/project/${project.slug}`}
                       className="inline-flex items-center gap-1 px-4 py-2 rounded-xl text-xs font-bold bg-violet-600/10 dark:bg-violet-600/20 text-violet-600 dark:text-violet-400 hover:bg-violet-600 hover:text-white transition-all duration-200"
                     >
-                      <span>Full Case Study</span>
+                      <span>Case Study</span>
                       <ArrowUpRight size={14} />
                     </Link>
                   </div>

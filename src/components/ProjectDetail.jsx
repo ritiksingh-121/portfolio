@@ -6,6 +6,65 @@ import { FaGithub } from "react-icons/fa";
 import TechLogo from "./TechLogo";
 
 const PROJECT_DATA = {
+  "voxspeak": {
+    title: "VoxSpeak AI English Coach",
+    tagline: "Adaptive AI Speaking Coach with Real-Time Speech Prosody Feedback",
+    overview: "VoxSpeak is an interactive, voice-first AI English speaking coach. It allows learners to practice conversational English naturally, receiving instant feedback on pronunciation, cadence, grammar, and vocabulary retention with sub-280ms audio latency.",
+    problem: "Language learners face high costs ($30–$80/hr) for native tutors and suffer from conversational anxiety when practicing in public. Static language apps only offer repetitive flashcards without real conversational speech feedback.",
+    solution: "Architected a voice-native Next.js 14 application with Web Audio API streaming, Groq ultra-low latency LLM inference, and an adaptive persona engine that remembers past learner mistakes and calibrates conversational difficulty in real time.",
+    features: [
+      "Real-time voice stream synthesis with sub-280ms latency",
+      "Adaptive conversational AI tutor with contextual memory",
+      "Instant prosody, pronunciation, and grammar scoring matrix",
+      "Personalized learning journeys and vocabulary retention tracking",
+      "PWA mobile-first responsive interface with dark mode",
+      "Multi-accent calibration (US, UK, Neutral International)"
+    ],
+    metrics: [
+      { label: "Audio Stream Latency", value: "< 280ms" },
+      { label: "Pronunciation Accuracy", value: "98.2%" },
+      { label: "Mobile PWA Compatibility", value: "100%" }
+    ],
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Groq AI", "Zustand", "REST API", "Git"],
+    github: "https://github.com/ritiksingh-121",
+    live: "https://web-five-pi-58.vercel.app/onboarding/welcome",
+    architecture: {
+      frontend: "Next.js 14 + Web Audio API Prosody Canvas",
+      backend: "Node.js WebSocket Streaming Gateway",
+      database: "MongoDB User Lexicon & Conversation Buffer",
+      aiWorker: "Groq Llama 3 Fast Voice & Inference Pipeline"
+    }
+  },
+  "ai-interview-platform": {
+    title: "IntervU AI Mock Platform",
+    tagline: "Real-Time Voice & Technical Mock Interview Simulator",
+    overview: "An intelligent interview preparation platform where candidates conduct realistic mock interviews, receive AI-generated questions tailored to specific job descriptions, get live speech prosody analysis, and receive comprehensive performance evaluation reports.",
+    problem: "Job seekers lack realistic, AI-driven interview practice platforms that provide instant feedback, speech analysis, and performance evaluation. Traditional mock interviews require human interviewers, are expensive, and don't offer objective metrics or consistent practice opportunities.",
+    solution: "This platform leverages AI to generate dynamic interview questions based on the user's target role and experience level. It analyzes speech patterns, provides real-time feedback on communication skills, and generates detailed performance reports covering technical accuracy, clarity, confidence, and areas for improvement.",
+    features: [
+      "AI-powered mock interview question generation",
+      "Real-time speech and communication analysis",
+      "Comprehensive performance evaluation reports",
+      "Secure authentication with JWT",
+      "Interactive dashboard tracking progress over time",
+      "Responsive and modern UI with smooth animations",
+      "Multiple interview categories and difficulty levels"
+    ],
+    metrics: [
+      { label: "Voice Pipeline Latency", value: "< 450ms" },
+      { label: "Candidate Retention", value: "72%" },
+      { label: "Objective Scoring", value: "100%" }
+    ],
+    tech: ["React", "Vite", "Tailwind CSS", "Node.js", "Express", "MongoDB", "JWT", "OpenAI/Groq AI", "Framer Motion", "REST API", "Git"],
+    github: "https://github.com/ritiksingh-121/ai-interview-platform",
+    live: "https://ai-interview-platform-dusky.vercel.app/",
+    architecture: {
+      frontend: "React + Web Audio Prosody Client",
+      backend: "Node.js WebSocket Streaming Gateway",
+      database: "MongoDB Session Evaluation Records",
+      aiWorker: "OpenAI Whisper & Groq Llama 3 Engine"
+    }
+  },
   "crawlforge": {
     title: "CrawlForge AI Engine",
     tagline: "Enterprise-Grade AI Web Scraping & Intelligence Pipeline",
@@ -35,36 +94,6 @@ const PROJECT_DATA = {
       backend: "Express.js Worker Pipeline",
       database: "MongoDB Time-Series Collections",
       aiWorker: "Groq Llama 3 Fast Extractor"
-    }
-  },
-  "ai-interview-platform": {
-    title: "IntervU AI Platform",
-    tagline: "Real-Time Voice & Communication Mock Interview Simulator",
-    overview: "An intelligent interview preparation platform where users can take realistic mock interviews, receive AI-generated questions tailored to their domain, get real-time communication analysis, and receive comprehensive performance evaluation with actionable feedback.",
-    problem: "Job seekers lack realistic, AI-driven interview practice platforms that provide instant feedback, speech analysis, and performance evaluation. Traditional mock interviews require human interviewers, are expensive, and don't offer objective metrics or consistent practice opportunities.",
-    solution: "This platform leverages AI to generate dynamic interview questions based on the user's target role and experience level. It analyzes speech patterns, provides real-time feedback on communication skills, and generates detailed performance reports covering technical accuracy, clarity, confidence, and areas for improvement.",
-    features: [
-      "AI-powered mock interview question generation",
-      "Real-time speech and communication analysis",
-      "Comprehensive performance evaluation reports",
-      "Secure authentication with JWT",
-      "Interactive dashboard tracking progress over time",
-      "Responsive and modern UI with smooth animations",
-      "Multiple interview categories and difficulty levels"
-    ],
-    metrics: [
-      { label: "Voice Pipeline Latency", value: "< 450ms" },
-      { label: "Candidate Retention", value: "72%" },
-      { label: "Objective Scoring", value: "100%" }
-    ],
-    tech: ["React", "Vite", "Tailwind CSS", "Node.js", "Express", "MongoDB", "JWT", "OpenAI/Groq AI", "Framer Motion", "REST API", "Git"],
-    github: "https://github.com/ritiksingh-121/ai-interview-platform",
-    live: "https://github.com/ritiksingh-121/ai-interview-platform#readme",
-    architecture: {
-      frontend: "React + Web Audio Prosody Client",
-      backend: "Node.js WebSocket Streaming Gateway",
-      database: "MongoDB Session Evaluation Records",
-      aiWorker: "OpenAI Whisper & Groq Llama 3 Engine"
     }
   },
   "ai-video-generator": {
@@ -122,34 +151,6 @@ const PROJECT_DATA = {
       backend: "Socket.io Clustered Gateway",
       database: "Redis In-Memory Coordinate Buffer",
       aiWorker: "Geofence Polygon Computation Worker"
-    }
-  },
-  "url-shortener": {
-    title: "LinkPulse Analytics Gateway",
-    tagline: "High-Throughput URL Shortening & Real-Time Traffic Analytics",
-    overview: "An enterprise-grade link management and click telemetry engine designed for high-concurrency redirects with millisecond lookup speeds, geographic access charting, and bot filtering.",
-    problem: "Marketing teams lack real-time visibility into campaign link clicks, device user-agents, and referrers without incurring expensive third-party subscription costs.",
-    solution: "Engineered a low-latency redirection engine backed by Base62 hash indexing, MongoDB geo-analytics aggregation, and a responsive Tailwind metrics dashboard.",
-    features: [
-      "Base62 collision-free short URL generation",
-      "Sub-20ms database redirection lookup",
-      "Interactive analytics dashboard charting referrers and geolocations",
-      "Custom vanity URL aliases support",
-      "Exportable CSV traffic reports"
-    ],
-    metrics: [
-      { label: "Lookup Latency", value: "< 20ms" },
-      { label: "Database Compression", value: "65%" },
-      { label: "Analytics Refresh", value: "Real-time" }
-    ],
-    tech: ["React", "Node.js", "MongoDB", "Express", "Tailwind CSS", "REST API"],
-    github: "https://github.com/ritiksingh-121/URL-Shortener",
-    live: "https://github.com/ritiksingh-121/URL-Shortener#readme",
-    architecture: {
-      frontend: "React Dashboard + Chart.js Telemetry",
-      backend: "Express.js Fast Redirection Gateway",
-      database: "MongoDB Indexed Hash Collections",
-      aiWorker: "User-Agent & Bot Detection Middleware"
     }
   }
 };
@@ -213,22 +214,22 @@ export default function ProjectDetail() {
             {/* CTAs */}
             <div className="flex flex-wrap items-center gap-4 mt-8">
               <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 hover:bg-violet-600 dark:hover:bg-violet-500 hover:text-white dark:hover:text-white font-bold text-sm transition-all duration-300 hover:scale-105 active:scale-95 shadow-md"
-              >
-                <FaGithub size={18} />
-                GitHub Repository
-              </a>
-              <a
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-violet-600 text-white hover:bg-violet-500 font-bold text-sm transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-violet-600/30"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-violet-600 text-white hover:bg-violet-500 font-bold text-sm transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-violet-600/30"
               >
-                <ExternalLink size={18} />
-                Documentation Specs
+                <ExternalLink size={17} />
+                Launch Live App Demo
+              </a>
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 hover:bg-violet-600 dark:hover:bg-violet-500 hover:text-white dark:hover:text-white font-bold text-sm transition-all duration-300 hover:scale-105 active:scale-95 shadow-md"
+              >
+                <FaGithub size={17} />
+                GitHub Repository
               </a>
             </div>
           </motion.div>
@@ -424,15 +425,24 @@ export default function ProjectDetail() {
       <section className="py-20 text-center">
         <div className="max-w-3xl mx-auto px-6 space-y-6">
           <h2 className="text-3xl font-extrabold text-zinc-950 dark:text-white">
-            Need a Similar System Built for Your Company?
+            Need a Similar AI or Real-Time System Built?
           </h2>
           <p className="text-sm text-zinc-600 dark:text-zinc-300">
             We architect and ship production software in 4 to 8 week milestone sprints.
           </p>
-          <div className="pt-2">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-violet-600 text-white hover:bg-violet-500 font-bold text-sm transition-all duration-300 hover:scale-105 shadow-xl shadow-violet-600/30"
+            >
+              <ExternalLink size={16} />
+              Open Live App
+            </a>
             <Link
               to="/#contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-violet-600 text-white hover:bg-violet-500 font-bold text-sm transition-all duration-300 hover:scale-105 shadow-xl shadow-violet-600/30"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 hover:bg-zinc-800 font-bold text-sm transition"
             >
               Start a Project Conversation
             </Link>

@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Lenis from "lenis";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import FeaturedShowcase from "./components/FeaturedShowcase";
 import Services from "./components/Services";
 import Process from "./components/Process";
 import Projects from "./components/Projects";
@@ -59,6 +60,7 @@ function HomePage({ onOpenBooking }) {
   return (
     <main className="relative z-10">
       <Hero onOpenBooking={onOpenBooking} />
+      <FeaturedShowcase />
       <Services onOpenBooking={onOpenBooking} />
       <Process />
       <Projects />
